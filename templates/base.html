@@ -14,7 +14,8 @@
             <!-- ... другие ссылки ... -->
               {% if user.is_staff %}
                 <li><a href="{% url 'attendance_add' %}">Отметить посещаемость</a></li>
-
+                <li><a href="{% url 'about' %}">О системе</a></li>
+                <li><a href = "{% url 'contacts' %}">Контакты</a></li>
               {% endif %}
 
         </ul>
@@ -32,5 +33,16 @@
     <div class="content">
         {% block content %}{% endblock %}
     </div>
+    {% if user.is_authenticated %}
+        {% if user.is_student %}
+            <li><a href="{% url 'profile' %}">Мой профиль</a></li>
+        {% elif user.is_teacher %}
+            <li><a href="{% url 'add_attendance' %}">Журнал</a></li>
+        {% endif %}
+        <li><a href="{% url 'logout' %}">Выйти ({{ user.username }})</a></li>
+    {% else %}
+         <li><a href="{% url 'login' %}">Вход</a></li>
+         <li><a href="{% url 'register' %}">Регистрация</a></li>
+    {% endif %}
 </body>
 </html>

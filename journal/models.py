@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User  # Добавьте этот импорт
+from django.conf import settings
 
 # Create your models here.
 
@@ -20,10 +21,13 @@ class Student(models.Model):
     name = models.CharField("ФИО студента", max_length=100)
     group = models.ForeignKey(Group, on_delete=models.CASCADE, verbose_name="Группа")
     birth_date = models.DateField("Дата рождения", null=True, blank=True)
-    # Optional: user_profile = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user_profile = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} ({self.group.name})"
+    
+class Teacher(models.Model):
+    user_profile = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 
 class Attendance(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name="Студент")
