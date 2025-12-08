@@ -27,7 +27,10 @@ class Student(models.Model):
         return f"{self.name} ({self.group.name})"
     
 class Teacher(models.Model):
+    name = models.CharField("ФИО преподователя", max_length=100)
     user_profile = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    def __str__(self):
+        return f"{self.name}"
 
 class Attendance(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name="Студент")
