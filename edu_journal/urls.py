@@ -23,4 +23,5 @@ urlpatterns = [
  path('admin/', admin.site.urls),
  path('', include('journal.urls')), # подключаем маршруты приложения
  path('accounts/', include('users.urls')),
+
 ]

@@ -21,8 +21,10 @@
             {% if user.is_authenticated %}
                 {% if user.is_student %}
                     <li><a href="{% url 'profile' %}">Мой профиль</a></li>
+                    <li><a href="{% url 'my_attendance' %}">Моя посещаемость</a></li>
                 {% elif user.is_teacher %}
-                    <li><a href="{% url 'add_attendance' %}">Журнал</a></li>
+                    <li><a href="{% url 'teacher_panel' %}">Панель преподавателя</a></li>
+                    <li><a href="{% url 'attendance_add' %}">Журнал</a></li>
                 {% endif %}
                 <li><a href="{% url 'logout' %}">Выйти ({{ user.username }})</a></li>
             {% else %}

@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
 ]
 
-LOGIN_REDIRECT_URL = 'profile/'
-LOGOUT_REDIRECT_URL = 'index/'
+LOGIN_REDIRECT_URL = 'journal/index/'
+LOGOUT_REDIRECT_URL = 'journal/index/'
 
 
 MIDDLEWARE = [
