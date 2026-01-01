@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Посещаемость {{ lesson.id_subject.name }} {{ lesson.date }} – Электронный журнал{% endblock title %}
+{% block content %}
+<h2 class="mb-3">Посещаемость занятия</h2>
+<div class="mb-4">
+    <p><strong>Группа:</strong> {{ group.name }}</p>
+    <p><strong>Предмет:</strong> {{ lesson.id_subject.name }}</p>
+    <p><strong>Дата занятия:</strong> {{ lesson.date }} ({{ lesson.period.name }}, {{ lesson.type.name }})</p>
+    <p><strong>Преподаватель:</strong> {{ lesson.id_teacher.last_name }} {{ lesson.id_teacher.first_name }}</p>
+</div>
+<table class="table table-hover align-middle">
+    <thead>
+        <tr>
+            <th>Студент</th>
+            <th>Статус</th>
+            <th>Примечание</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for att in attendances %}
+        <tr>
+            <td>{{ att.id_student.last_name }} {{ att.id_student.first_name }}</td>
+            <td>{{ att.status.name }}</td>
+            <td>{{ att.note|default:"" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="text-center text-muted">Данные о посещаемости отсутствуют.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include "pagination.html" with page_obj=page_obj %}
+{% endblock content %}
